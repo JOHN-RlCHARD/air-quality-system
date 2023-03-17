@@ -1,5 +1,6 @@
 import dbhelper
 import menu
+import validators
 
 db = dbhelper.DbHelper()
 
@@ -21,8 +22,11 @@ def main():
             case "1":
                 ## INSERT A ROW
                 row = []
-                print("Measure Date(DD-MM-YYYY): ")
-                row.append(input())
+                date = ""
+                while not (validators.isValidTimeStamp(date)):
+                    print("Measure Date(DD-MM-YYYY): ")
+                    date = input()
+                row.append(date)
                 print("MP10: ")
                 row.append(input())
                 print("MP2.5: ")
@@ -39,9 +43,33 @@ def main():
             case "2":
                 back = None
                 db.printTable()
-                while back == None:
-                    print("\nPRESS [ENTER] TO GO BACK")
-                    back=input()
+                if db.checkTableExists():
+                    while back == None:
+                        print("\nPRESS [ENTER] TO GO BACK")
+                        back=input()
+            case "3":
+                row = []
+                db.printTable()
+                if db.checkTableExists():
+                    print("Type the ID of the Row to be altered:")
+                    row.append(input())
+                    column = ""
+                    while not (validators.isValidColumn(column)):
+                        print("Type the column to be altered(mp10, mp25, o3, co, no2, so2):")
+                        column = input()
+                    row.append(column)
+                    print("Type the new value for "+row[1]+":")
+                    row.append(input())
+                    db.updateRow(row)
+            case "4":
+                if db.checkTableExists():
+                    db.printTable()
+                    print("Type ID of the row to be deleted:")
+                    rowId = input()
+                    db.deleteRow(rowId)
+
+            case "6":
+                db.dropTable()
             case "0":
                 ## LEAVE SYSTEM
                 print("\nLEAVING SYSTEM...")
