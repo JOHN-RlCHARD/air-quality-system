@@ -88,6 +88,26 @@ class DbHelper:
         print("Table droped")
 
         self.connection.commit()
+
+    ## GET DATA FROM ROW
+    def getRow(self, rowId):
+        res = []
+        if not self.checkTableExists():
+            print("Table is empty")
+            return
+
+        for row in self.cursor.execute('SELECT * FROM airquality'):
+            if (str(row[0]) == rowId): 
+                res.append(row[2])
+                res.append(row[3])
+                res.append(row[4])
+                res.append(row[5])
+                res.append(row[6])
+                res.append(row[7])
+
+        if (res == []): print("There is no Row with id = "+rowId)
+
+        return res
     
     def checkTableExists(self):
         try:

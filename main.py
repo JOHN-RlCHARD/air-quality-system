@@ -1,6 +1,7 @@
 import dbhelper
 import menu
 import validators
+import classification
 
 db = dbhelper.DbHelper()
 
@@ -67,7 +68,14 @@ def main():
                     print("Type ID of the row to be deleted:")
                     rowId = input()
                     db.deleteRow(rowId)
-
+            case "5":
+                db.printTable()
+                if db.checkTableExists():
+                    print("Type the ID of the Row to be classified:")
+                    row = input()
+                    rowData = db.getRow(row)
+                    if (rowData != []):
+                        classification.classify(rowData)
             case "6":
                 db.dropTable()
             case "0":
