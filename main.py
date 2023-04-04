@@ -77,6 +77,9 @@ def main():
                     if (rowData != []):
                         classification.classify(rowData)
             case "6":
+                if db.checkTableExists():
+                    classification.classify(db.getAllRowData())
+            case "7":
                 db.dropTable()
             case "0":
                 ## LEAVE SYSTEM

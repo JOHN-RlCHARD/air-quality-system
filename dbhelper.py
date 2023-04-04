@@ -109,6 +109,31 @@ class DbHelper:
 
         return res
     
+    ## GET DATA FROM ALL ROWS AND RETURN AVARAGE
+    def getAllRowData(self):
+        res = []
+        mp10, mp25, o3, co, no2, so2 = 0, 0, 0, 0, 0, 0
+        if not self.checkTableExists():
+            print("Table is empty")
+            return
+        i = 0
+        for row in self.cursor.execute('SELECT * FROM airquality'):
+            i = i+1
+            mp10 = mp10 + int(row[2])
+            mp25 = mp25 + int(row[3])
+            o3 = o3 + int(row[4])
+            co = co + int(row[5])
+            no2 = no2 + int(row[6])
+            so2 = so2 + int(row[7])
+        res.append(mp10/i)
+        res.append(mp25/i)
+        res.append(o3/i)
+        res.append(co/i)
+        res.append(no2/i)
+        res.append(so2/i)
+
+        return res
+
     def checkTableExists(self):
         try:
             self.cursor.execute("SELECT * FROM airquality")
