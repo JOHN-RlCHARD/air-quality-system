@@ -23,44 +23,38 @@ description = [
     "Toda a população pode apresentar sérios riscos de\nmanifestação de doenças respiratórias e\ncardiovasculares. Aumento de mortes prematuras\nem pessoas de grupos sensíveis."
 ]
 
+def grade(data, reg1, reg2, reg3, reg4):
+    if (int(data) <= reg1): return 0
+    elif (int(data) > reg1 and int(data) <= reg2): return 1
+    elif (int(data) > reg2 and int(data) <= reg3): return 2
+    elif (int(data) > reg3 and int(data) <= reg4): return 3
+    elif (int(data) > reg4): return 4
+
 def classify(data):
     res = []
-    if (int(data[0]) <= 50): res.append(0)
-    elif (int(data[0]) > 50 and int(data[0]) <= 100): res.append(1)
-    elif (int(data[0]) > 100 and int(data[0]) <= 150): res.append(2)
-    elif (int(data[0]) > 150 and int(data[0]) <= 250): res.append(3)
-    elif (int(data[0]) > 250): res.append(4)
-
-    if (int(data[1]) <= 25): res.append(0)
-    elif (int(data[1]) > 25 and int(data[1]) <= 50): res.append(1)
-    elif (int(data[1]) > 50 and int(data[1]) <= 75): res.append(2)
-    elif (int(data[1]) > 75 and int(data[1]) <= 125): res.append(3)
-    elif (int(data[1]) > 125): res.append(4)
-
-    if (int(data[2]) <= 100): res.append(0)
-    elif (int(data[2]) > 100 and int(data[2]) <= 130): res.append(1)
-    elif (int(data[2]) > 130 and int(data[2]) <= 160): res.append(2)
-    elif (int(data[2]) > 160 and int(data[2]) <= 200): res.append(3)
-    elif (int(data[2]) > 200): res.append(4)
-
-    if (int(data[3]) <= 9): res.append(0)
-    elif (int(data[3]) > 9 and int(data[3]) <= 11): res.append(1)
-    elif (int(data[3]) > 11 and int(data[3]) <= 13): res.append(2)
-    elif (int(data[3]) > 13 and int(data[3]) <= 15): res.append(3)
-    elif (int(data[3]) > 15): res.append(4)
-
-    if (int(data[4]) <= 200): res.append(0)
-    elif (int(data[4]) > 200 and int(data[4]) <= 240): res.append(1)
-    elif (int(data[4]) > 240 and int(data[4]) <= 320): res.append(2)
-    elif (int(data[4]) > 320 and int(data[4]) <= 1130): res.append(3)
-    elif (int(data[4]) > 1130): res.append(4)
-
-    if (int(data[5]) <= 20): res.append(0)
-    elif (int(data[5]) > 20 and int(data[5]) <= 40): res.append(1)
-    elif (int(data[5]) > 40 and int(data[5]) <= 365): res.append(2)
-    elif (int(data[5]) > 365 and int(data[5]) <= 800): res.append(3)
-    elif (int(data[5]) > 800): res.append(4)
+    res.append(grade(data[0], 50, 100, 150, 250))
+    res.append(grade(data[1], 25, 50, 75, 125))
+    res.append(grade(data[2], 100, 130, 160, 200))
+    res.append(grade(data[3], 9, 11, 13, 15))
+    res.append(grade(data[4], 200, 240, 320, 1130))
+    res.append(grade(data[5], 20, 40, 365, 800))
         
     finalres = max(res)
     print("\nClassificação: "+quality[finalres])
     print(description[finalres])
+
+testData = [
+    [0, 0, 0, 0, 0, 0],
+    [50, 25, 100, 9, 200, 20],
+    [51, 0, 0, 0, 0, 0],
+    [100, 26, 0, 0, 0, 0],
+    [0, 0, 131, 0, 0, 0],
+    [0, 0, 160, 12, 0, 0],
+    [0, 0, 0, 0, 321, 0],
+    [0, 0, 0, 0, 1130, 366],
+    [251, 0, 0, 0, 0, 0],
+    [251, 126, 0, 0, 0, 0]
+]
+
+for data in testData:
+    classify(data)
