@@ -43,18 +43,18 @@ def classify(data):
     print("\nClassificação: "+quality[finalres])
     print(description[finalres])
 
-testData = [
-    [0, 0, 0, 0, 0, 0],
-    [50, 25, 100, 9, 200, 20],
-    [51, 0, 0, 0, 0, 0],
-    [100, 26, 0, 0, 0, 0],
-    [0, 0, 131, 0, 0, 0],
-    [0, 0, 160, 12, 0, 0],
-    [0, 0, 0, 0, 321, 0],
-    [0, 0, 0, 0, 1130, 366],
-    [251, 0, 0, 0, 0, 0],
-    [251, 126, 0, 0, 0, 0]
-]
+# testData = [
+#     [0, 0, 0, 0, 0, 0], #BOA
+#     [50, 25, 100, 9, 200, 20], #BOA
+#     [51, 0, 0, 0, 0, 0], #MODERADA
+#     [100, 26, 0, 0, 0, 0], #MODERADA
+#     [0, 0, 131, 0, 0, 0], #RUIM
+#     [0, 0, 160, 12, 0, 0], #RUIM
+#     [0, 0, 0, 0, 321, 0], #MUITO RUIM
+#     [0, 0, 0, 0, 1130, 366], #MUITO RUIM
+#     [251, 0, 0, 0, 0, 0], #PESSIMO
+#     [251, 126, 0, 0, 0, 0] #PESSIMO
+# ]
 
-for data in testData:
-    classify(data)
+# for data in testData:
+#     classify(data)
