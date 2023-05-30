@@ -29,12 +29,12 @@ class DbHelper:
             CREATE TABLE airquality (
                 id NUMBER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),
                 measuredate TIMESTAMP,
-                mp10 NUMBER(3),
-                mp25 NUMBER(3),
-                o3 NUMBER(3),
-                co NUMBER(3),
-                no2 NUMBER(3),
-                so2 NUMBER(3)
+                mp10 NUMBER(5),
+                mp25 NUMBER(5),
+                o3 NUMBER(5),
+                co NUMBER(5),
+                no2 NUMBER(5),
+                so2 NUMBER(5)
             )""")
         
     ## INSERT
