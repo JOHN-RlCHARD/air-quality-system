@@ -41,8 +41,11 @@ class DbHelper:
     def insertRow(self, row):
         if not self.checkTableExists(): self.createTable()
         
-        self.cursor.execute("INSERT INTO airquality (measuredate, mp10, mp25, o3, co, no2, so2) VALUES (TO_TIMESTAMP(:1, 'DD-MM-YYYY'), :2, :3, :4, :5, :6, :7)", row)
-        print(self.cursor.rowcount, "Row Inserted")
+        try:
+            self.cursor.execute("INSERT INTO airquality (measuredate, mp10, mp25, o3, co, no2, so2) VALUES (TO_TIMESTAMP(:1, 'DD-MM-YYYY'), :2, :3, :4, :5, :6, :7)", row)
+            print(self.cursor.rowcount, "Row Inserted")
+        except:
+            print("Input error")
 
         self.connection.commit()
 

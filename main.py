@@ -28,18 +28,14 @@ def main():
                     print("Measure Date(DD-MM-YYYY): ")
                     date = input()
                 row.append(date)
-                print("MP10: ")
-                row.append(input())
-                print("MP2.5: ")
-                row.append(input())
-                print("O3: ")
-                row.append(input())
-                print("CO: ")
-                row.append(input())
-                print("NO2: ")
-                row.append(input())
-                print("SO2: ")
-                row.append(input())
+                inputDescs = ["MP10: ", "MP2.5: ", "O3: ", "CO: ", "NO2: ", "SO2: "]
+                for desc in inputDescs:
+                    rowAppend = "-1"
+                    while not validators.isValidMeasure(rowAppend):
+                        print(desc)
+                        rowAppend = input()
+                        if validators.isValidMeasure(rowAppend): row.append(rowAppend)
+
                 db.insertRow(row)
             case "2":
                 back = None
@@ -67,7 +63,12 @@ def main():
                     db.printTable()
                     print("Type ID of the row to be deleted:")
                     rowId = input()
-                    db.deleteRow(rowId)
+                    print("Proceed to delete row "+rowId+"? (y/n)")
+                    deleteOpt = input()
+                    if deleteOpt == "y" or deleteOpt == "Y":
+                        db.deleteRow(rowId)
+                    else:
+                        print("Canceled")
             case "5":
                 db.printTable()
                 if db.checkTableExists():
@@ -80,7 +81,12 @@ def main():
                 if db.checkTableExists():
                     classification.classify(db.getAllRowData())
             case "7":
-                db.dropTable()
+                print("Proceed to delete all data? (y/n)")
+                deleteOpt = input()
+                if deleteOpt == "y" or deleteOpt == "Y":
+                    db.dropTable()
+                else:
+                    print("Canceled")
             case "0":
                 ## LEAVE SYSTEM
                 print("\nLEAVING SYSTEM...")
